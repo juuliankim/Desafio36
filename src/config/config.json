@@ -1,0 +1,4 @@
+{
+    "MONGO_LOCAL": "mongodb://localhost:27017/coderhouse",
+    "MONGO_ATLAS": "mongodb+srv://juliankim:coderhouse@cluster0.jiary.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+}

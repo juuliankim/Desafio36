@@ -1,0 +1,68 @@
+{{#if showLogin}}
+<div class="container">
+    <form action="" method="POST" id="form-login">
+        <div class="mb-3">
+            <label for="inputEmail" class="form-label">Ingrese su email</label>
+            <input type="text" name="username" class="form-control form-text" id="email">
+        </div>
+        <div class="mb-3">
+            <label for="inputPassword" class="form-label">Ingrese su contraseña</label>
+            <input type="password" name="password" class="form-control form-text" id="password">
+        </div>
+        <button class="btn btn-info mt-3">Login</button>
+    </form>
+</div>
+{{/if}}
+
+{{#if showBienvenida}}
+<div class="container bienvenida">
+    <span>
+        <h3 style="float: left;" id="bienvenida">Bienvenido {{bienvenida}}</h3>
+        {{!-- <span><img src="{{foto}}" alt=""></span> --}}
+
+        <form style="float: right;" action="/users/logout" method="GET">
+            <button type="submit" id="boton-logout" class="btn btn-danger">Logout</button>
+        </form>
+    </span>
+
+</div>
+{{/if}}
+{{#if showContent}}
+<div class="container">
+    <button id="boton-productos" class="btn btn-info">PRODUCTOS</button>
+    <button id="boton-carrito" class="btn btn-info">CARRITO</button>
+
+    <div id="lista-productos" class='hidden'>{{listaProductos}}</div>
+    <div id='vista-carrito' class='hidden'>
+        <div>
+            {{vistaCarrito}}
+        </div>
+        <form style="float: right;" action="/api/carrito/comprar" method="GET">
+            <button type="button" id="boton-logout" class="btn btn-info">Realizar orden</button>
+        </form>
+    </div>
+</div>
+
+<div id="tabla"></div>
+
+{{/if}}
+
+<script type="application/javascript">
+    let botonProductos = document.getElementById('boton-productos')
+    let botonCarrito = document.getElementById('boton-carrito')
+    let divProductos = document.getElementById('lista-productos')
+    let divCarrito = document.getElementById('vista-carrito')
+
+    botonProductos.addEventListener('click', e => {
+        divProductos.classList.remove('hidden')
+        divCarrito.classList.add('hidden')
+    })
+    botonCarrito.addEventListener('click', e => {
+        divProductos.classList.add('hidden')
+        divCarrito.classList.remove('hidden')
+    })
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"
+    integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>

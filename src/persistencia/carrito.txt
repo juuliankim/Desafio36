@@ -1,0 +1,24 @@
+[
+	{
+		"id": 1,
+		"timestamp": "2021-06-29T23:16:08.748Z",
+		"productos": {
+			"nombre": "b",
+			"precio": 2,
+			"stock": 1,
+			"descripcion": "a",
+			"imagen": "aa"
+		}
+	},
+	{
+		"id": 2,
+		"timestamp": "2021-06-29T23:16:20.187Z",
+		"productos": {
+			"nombre": "b",
+			"precio": 2,
+			"stock": 1,
+			"descripcion": "a",
+			"imagen": "aa"
+		}
+	}
+]
