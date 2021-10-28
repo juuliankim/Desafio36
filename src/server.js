@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const passport = require('passport')
-const handlebars = ('express-handlebars')
+const handlebars = require('express-handlebars')
 const cluster = require('cluster')
 const numCPUs = require('os').cpus().length
 require('./loggers/log4js')
@@ -27,14 +27,6 @@ if (modoCluster == true && cluster.isMaster) {
     })
 }
 
-const productosRouter = require('./routes/productos')
-const carritoRouter = require('./routes/carrito')
-const usuariosRouter = require('./routes/usuarios')
-
-app.use('/api', productosRouter)
-app.use('/api', carritoRouter)
-app.use('/api', usuariosRouter)
-
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
@@ -52,17 +44,25 @@ app.engine('hbs', handlebars({
 app.set("view engine", "hbs")
 app.set("views", "./views")
 
+const productosRouter = require('./routes/productos')
+const carritoRouter = require('./routes/carrito')
+const usuariosRouter = require('./routes/usuarios')
+
+app.use('/api', productosRouter)
+app.use('/api', carritoRouter)
+app.use('/api', usuariosRouter)
+
 app.use((err, req, res, next) =>{
     console.error(err.message)
     res.status(500).send('Algo se rompio')
 })
 
 const server = app.listen(process.env.PORT, () => {
-    loggerConsola(`servidor corriendo en http://localhost:${process.env.PORT}`)
+    loggerConsola.info(`servidor corriendo en http://localhost:${process.env.PORT}`)
 })
 
 server.on('error', error => {
-    loggerError('Error de servidor: ', error)
+    loggerError.error('Error de servidor: ', error)
 })
 
 module.exports = server

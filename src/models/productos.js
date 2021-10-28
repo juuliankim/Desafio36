@@ -8,7 +8,7 @@ const schema = mongoose.Schema({
     precio: { type: Number, required: true },
     stock: { type: Number, required: true },
     timestamp: { type: String, required: true, max: 100 }
-}, { strict: false });
+}, { strict: false })
 
 const Productos = mongoose.model('productos', schema)
 

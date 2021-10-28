@@ -7,7 +7,7 @@ class Productos {
         this.validacionTabla()
     }
 
-    validacionTabla() {
+    async validacionTabla() {
         try {
             await knex.schema.hasTable('productos').then(function (exists) {
                 if (!exists) {
@@ -31,9 +31,8 @@ class Productos {
 
     async listar() {
         try {
-            this.validacionTabla()
-            let productos = await knex.from('productos').select('*')
-            return productos
+            let resultado = await knex('productos').select('*')
+            return resultado
         } catch(error) {
             throw error
         }
@@ -41,8 +40,8 @@ class Productos {
 
     async listarPorId(idProducto) {
         try {
-            this.validacionTabla()
             let resultado = await knex('productos').where({id: idProducto})
+            return resultado
         } catch(error) {
             throw error
         }
@@ -50,7 +49,6 @@ class Productos {
 
     async guardar(producto) {
         try {
-            this.validacionTabla()
             let timestamp = new Date().toLocaleString()
             producto.timestamp = timestamp
             let resultado = await knex('productos').insert(producto)
@@ -65,7 +63,7 @@ class Productos {
             let resultado = await knex('productos').where({id: idProducto}).update(nuevoProducto)
             return resultado
         } catch(error) {
-            throw error
+            throw new Error('No se pudo actualizar el producto')
         }
     }
 

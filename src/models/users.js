@@ -8,7 +8,7 @@ const schema = mongoose.Schema({
     edad: { type: String, required: true },
     telefono: { type: String, required: true },
     foto: { type: String, required: true }
-});
+})
 
 const Usuario = mongoose.model('Users', schema)
 

@@ -1,4 +1,4 @@
-const options = require('../config/mysql.js')
+const options = require('../config/mysql')
 const knex = require('knex')(options)
 const productos = require('./productoSql')
 
@@ -8,7 +8,7 @@ class Carrito {
         this.validacionTabla()
     }
 
-    validacionTabla() {
+    async validacionTabla() {
         try {
             await knex.schema.hasTable('carrito').then(function (exists) {
                 if (!exists) {
@@ -29,8 +29,8 @@ class Carrito {
     async listar() {
         try {
             this.validacionTabla()
-            let productos = await knex.from('carrito').select('*')
-            return productos
+            let resultado = await knex.from('carrito').select('*')
+            return resultado
         } catch(error) {
             throw error
         }
@@ -38,8 +38,8 @@ class Carrito {
 
     async listarPorId(idCarrito) {
         try {
-            this.validacionTabla()
-            let resultado = await knex('carrito').where({id: idCarrito})
+            let mensajes = await knex('carrito').where({id: idCarrito})
+            return mensajes
         } catch(error) {
             throw error
         }
@@ -47,7 +47,6 @@ class Carrito {
 
     async guardar(idProducto) {
         try {
-            this.validacionTabla()
             let carrito = {
                 id: 0,
                 timestamp: 'fecha',

@@ -20,14 +20,14 @@ router.post('/productos/guardar', async (req, res)=>{
     res.json(resultado)
 })
 
-router.put('/productos/actualizar/:id', accesoAdmin, async (req,res)=>{
+router.put('/productos/actualizar/:id', async (req,res)=>{
     let idProducto = req.params.id
     let productoActualizado = req.body
     let resultado = await productos.actualizar(idProducto, productoActualizado)
     res.json(resultado)
 })
 
-router.delete('/productos/borrar/:id', accesoAdmin, async (req,res)=>{
+router.delete('/productos/borrar/:id', async (req,res)=>{
     let idProducto = req.params.id
     let resultado = await productos.borrar(idProducto)
     res.json(resultado)
